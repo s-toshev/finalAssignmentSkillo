@@ -1,8 +1,9 @@
-package object.pages;
+package PageFactory;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import java.time.Duration;
@@ -10,9 +11,18 @@ import java.time.Duration;
 public class LoginPage {
     public static final String PAGE_URL = "http://training.skillo-bg.com:4300/users/login";
     private final WebDriver driver;
+    @FindBy(id = "sign-in-button")
+    private WebElement signInButton;
+    @FindBy(id = "defaultLoginFormPassword")
+    private WebElement passwordField;
+    @FindBy(id = "defaultLoginFormUsername")
+    private WebElement usernameField;
+    @FindBy(className = "h4")
+    private WebElement signInFormTitle;
 
     public LoginPage(WebDriver driver) {
         this.driver = driver;
+        PageFactory.initElements(driver, this);
     }
 
     public void login(String username, String password) {
@@ -22,27 +32,24 @@ public class LoginPage {
     }
 
     public void navigateTo() {
-        this.driver.get(LoginPage.PAGE_URL);
+        this.driver.get(PageObject.LoginPage.PAGE_URL);
     }
 
     public void clickSignIn() {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        WebElement signInButton = wait.until(ExpectedConditions.elementToBeClickable(By.id("sign-in-button")));
+        wait.until(ExpectedConditions.elementToBeClickable(signInButton));
         signInButton.click();
     }
 
     public void populatePassword(String password) {
-        WebElement passwordField = driver.findElement(By.id("defaultLoginFormPassword"));
         passwordField.sendKeys(password);
     }
 
     public void populateUsername(String username) {
-        WebElement userNameField = driver.findElement(By.id("defaultLoginFormUsername"));
-        userNameField.sendKeys(username);
+        usernameField.sendKeys(username);
     }
 
     public String getSignInElementText() {
-        WebElement signInFormTitle = driver.findElement(By.className("h4"));
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         wait.until(ExpectedConditions.visibilityOf(signInFormTitle));
         return signInFormTitle.getText();
@@ -52,6 +59,5 @@ public class LoginPage {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         return wait.until(ExpectedConditions.urlToBe(LoginPage.PAGE_URL));
     }
+
 }
-
-

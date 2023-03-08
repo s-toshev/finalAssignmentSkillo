@@ -1,4 +1,4 @@
-package object.pages;
+package PageFactory;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -22,5 +22,4 @@ public class Homepage {
     public void navigateTo() {
         this.driver.get(PAGE_URL);
     }
-
 }

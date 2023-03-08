@@ -1,9 +1,9 @@
-package functional.tests;
+package tests;
 
-import object.components.Header;
-import object.pages.Homepage;
-import object.pages.LoginPage;
-import object.pages.ProfilePage;
+import PageObject.Header;
+import PageObject.Homepage;
+import PageObject.LoginPage;
+import PageObject.ProfilePage;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import org.testng.annotations.*;
@@ -12,7 +12,7 @@ public class Logout extends TestObject {
     @DataProvider(name = "getUsers")
     public Object[][] getUsers() {
         return new Object[][]{
-                {"TestSkilloEvelin", "Test123"}
+                {"iskilloo", "123123aA"}
         };
     }
 
@@ -26,15 +26,15 @@ public class Logout extends TestObject {
         loginPage.login(username, password);
 
         Homepage homePage = new Homepage(driver);
-        Assert.assertTrue(homePage.isUrlLoaded(), "The Home URL is incorrect!");
+        Assert.assertTrue(homePage.isUrlLoaded(), "Home URL incorrect!");
 
         Header header = new Header(driver);
         header.clickProfile();
 
         ProfilePage profilePage = new ProfilePage(driver);
-        Assert.assertTrue(profilePage.isUrlLoaded(), "The Profile URL is not correct!");
+        Assert.assertTrue(profilePage.isUrlLoaded(), "Profile URL not correct!");
         String actualUserName = profilePage.getUsername();
-        Assert.assertEquals(actualUserName, username, "The username is incorrect!");
+        Assert.assertEquals(actualUserName, username, "Username incorrect!");
 
         header.clickLogout();
         Assert.assertTrue(loginPage.isUrlLoaded());

@@ -1,4 +1,4 @@
-package functional.tests;
+package tests;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -8,7 +8,7 @@ import org.testng.annotations.Test;
 
 import java.io.File;
 
-public class DownloadTest extends TestObject {
+public class Download extends TestObject {
     @Test
     public void testDownload() throws InterruptedException {
         WebDriver driver = super.getDriver();

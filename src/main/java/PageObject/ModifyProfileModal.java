@@ -1,60 +1,57 @@
-package factory.components;
+package PageObject;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
 import java.time.Duration;
 
 public class ModifyProfileModal {
 
     private final WebDriver driver;
-
-    @FindBy(xpath = "//input[@formcontrolname=\"username\"]")
-    private WebElement username;
-    @FindBy(xpath = "//textarea[@formcontrolname=\"publicInfo\"]")
-    private WebElement publicInfoField;
-    @FindBy(xpath = "//button[@type=\"submit\"]")
-    private WebElement saveButton;
-    @FindBy(xpath = "//input[@formcontrolname=\"email\"]")
-    private WebElement emailField;
+    private final WebElement modalElement;
 
     public ModifyProfileModal(WebDriver driver) {
         this.driver = driver;
-        PageFactory.initElements(driver, this);
+        this.modalElement = driver.findElement(By.className("modal-content"));
     }
 
     public void changeUsername(String newUsername) {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        wait.until(ExpectedConditions.elementToBeClickable(username)).isEnabled();
-        username.clear();
-        username.sendKeys(newUsername);
+            WebElement username = modalElement.findElement(By.xpath("//input[@formcontrolname=\"email\"]"));
+            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+            wait.until(ExpectedConditions.elementToBeClickable(username)).isEnabled();
+            username.clear();
+            username.sendKeys(newUsername);
     }
 
     public void updatePublicInfo (String publicInfo) {
+        WebElement publicInfoField = modalElement.findElement(By.xpath("//textarea[@formcontrolname=\"publicInfo\"]"));
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         wait.until(ExpectedConditions.elementToBeClickable(publicInfoField)).isEnabled();
         publicInfoField.clear();
         publicInfoField.sendKeys(publicInfo);
+
     }
 
     public void clickSaveButton () {
+        WebElement saveButton = modalElement.findElement(By.xpath("//button[@type=\"submit\"]"));
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         wait.until(ExpectedConditions.elementToBeClickable(saveButton)).isEnabled();
         saveButton.click();
     }
 
     public void updateEmail (String email) {
+        WebElement emailField = modalElement.findElement(By.xpath("//input[@formcontrolname=\"email\"]"));
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         wait.until(ExpectedConditions.elementToBeClickable(emailField)).isEnabled();
         emailField.clear();
         emailField.sendKeys(email);
+
     }
 
     public String isEmailUpdated() {
-        return emailField.getText();
+        WebElement actualEmail = driver.findElement(By.xpath("//input[@formcontrolname='email']"));
+        return actualEmail.getText();
     }
 }

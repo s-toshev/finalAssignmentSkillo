@@ -1,4 +1,4 @@
-package functional.tests;
+package tests;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.apache.commons.io.FileUtils;
@@ -18,7 +18,7 @@ import java.util.Map;
 
 public class TestObject {
     public static final String TEST_RESOURCES_DIR = "src\\test\\resources\\";
-    public static final String DOWNLOAD_DIR = TEST_RESOURCES_DIR.concat("download\\");
+    public static final String DOWNLOAD_DIR = TEST_RESOURCES_DIR.concat("Download\\");
     public static final String SCREENSHOTS_DIR = TEST_RESOURCES_DIR.concat("screenshots\\");
     public static final String REPORTS_DIR = TEST_RESOURCES_DIR.concat("reports\\");
     private WebDriver driver;
