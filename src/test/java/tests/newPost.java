@@ -50,7 +50,7 @@ public class newPost extends TestObject {
 
         ProfilePage profilePage = new ProfilePage(driver);
         Assert.assertTrue(profilePage.isUrlLoaded(), "Profile URL not correct!");
-        Assert.assertEquals(profilePage.getPostCount(), 1, "The Number of Posts incorrect!");
+        Assert.assertEquals(profilePage.getPostCount(), 1, "Number of Posts incorrect!");
         profilePage.clickPost(0);
 
         PostModal postModal = new PostModal(driver);
